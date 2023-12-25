@@ -10,12 +10,12 @@ npm install ts-dialog
 
 ## Usage
 
-```es6
+```bash
 import { Dialog } from "ts-dialog";
 import { useState } from "react";
 
 const MyComponent: React.FC = () => {
-  const [openModal, setOpenModal] = useState < boolean > false;
+  const [openModal, setOpenModal] = useState < boolean > (false);
   return (
     <>
       <button onClick={() => setOpenModal(true)}>Open</button>
