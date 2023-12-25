@@ -1,0 +1,51 @@
+{
+  "name": "ts-dialog",
+  "version": "1.0.0",
+  "description": "html5 dialog element animation and style.",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "tsc": "tsc",
+    "start": "webpack serve --mode development --open"
+  },
+  "keywords": [
+    "dialog",
+    "modal",
+    "dialogbox",
+    "modalbox",
+    "react typescript dialog",
+    "html5 dialog element",
+    "dialog box animation",
+    "modal box animation"
+  ],
+  "author": "Monir U Zaman",
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "autoprefixer": "^10.4.16",
+    "css-loader": "^6.8.1",
+    "postcss": "^8.4.32",
+    "postcss-loader": "^7.3.3",
+    "style-loader": "^3.3.3",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "peerDependencies": {
+    "react": "^18.*",
+    "react-dom": "18.*"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bilchalan/ts-dialog.git"
+  },
+  "homepage": "https://github.com/bilchalan/ts-dialog#readme"
+}

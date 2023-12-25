@@ -1,0 +1,159 @@
+/* top */
+.slideFromTop {
+  transform: translateY(-100%);
+}
+.slideFromTop[open] {
+  transform: translateY(0);
+}
+@starting-style {
+  .slideFromTop[open] {
+    transform: translateY(-100%);
+  }
+}
+
+/* bottom */
+.slideFromBottom {
+  transform: translateY(100%);
+}
+.slideFromBottom[open] {
+  transform: translateY(0);
+}
+@starting-style {
+  .slideFromBottom[open] {
+    transform: translateY(100%);
+  }
+}
+/* left */
+.slideFromLeft {
+  transform: translateX(-500%);
+}
+.slideFromLeft[open] {
+  transform: translateX(0);
+}
+@starting-style {
+  .slideFromLeft[open] {
+    transform: translateX(-500%);
+  }
+}
+/* right */
+.slideFromRight {
+  transform: translateX(500%);
+}
+.slideFromRight[open] {
+  opacity: 1;
+  transform: translate(0);
+}
+@starting-style {
+  .slideFromRight[open] {
+    transform: translateX(500%);
+  }
+}
+/* zoom */
+.zoomInOut {
+  transform: scale(0);
+}
+.zoomInOut[open] {
+  transform: scale(1);
+}
+@starting-style {
+  .zoomInOut[open] {
+    transform: scale(0);
+  }
+}
+
+/*-------------------similar condition for all------------------------*/
+/*trancition for all*/
+.allTransition {
+  transition:
+    all 0.3s ease-in-out,
+    overlay 0.3s ease-in-out allow-discrete,
+    display 0.3s ease-in-out allow-discrete;
+}
+/*opacity start style for all*/
+@starting-style {
+  .startOpacity[open] {
+    opacity: 0;
+  }
+}
+/*opacity at open style for all*/
+.openOpacity[open] {
+  opacity: 1;
+}
+/*opacity at end style for all*/
+.endOpacity {
+  opacity: 0;
+}
+
+/*----------------------------------------------------------------------------------------------*/
+/* dialog backdrop*/
+.bkd::backdrop {
+  opacity: 0;
+  transition:
+    all 0.3s ease-out,
+    overlay 0.3s ease-out allow-discrete,
+    display 0.3s allow-discrete,
+    background-color 0.3s;
+}
+.bkd[open]::backdrop {
+  opacity: 0.75;
+}
+@starting-style {
+  .bkd[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+/* dialog backdrop  black color*/
+.blackBackdrop::backdrop {
+  background-color: rgb(0 0 0 / 0);
+}
+
+.blackBackdrop[open]::backdrop {
+  background-color: rgb(0 0 0 / 0.75);
+}
+@starting-style {
+  .blackBackdrop[open]::backdrop {
+    background-color: rgb(0 0 0 / 0);
+  }
+}
+/* dialog backdrop white color*/
+.whiteBackdrop::backdrop {
+  background-color: rgb(255 255 255 / 0);
+}
+
+.whiteBackdrop[open]::backdrop {
+  background-color: rgb(255 255 255 / 0.75);
+}
+@starting-style {
+  .whiteBackdrop[open]::backdrop {
+    background-color: rgb(255 255 255 / 0);
+  }
+}
+
+/* dialog backdrop red color*/
+.redBackdrop::backdrop {
+  background-color: rgb(255 0 0 / 0);
+}
+
+.redBackdrop[open]::backdrop {
+  background-color: rgb(255 0 0 / 0.75);
+}
+@starting-style {
+  .redBackdrop[open]::backdrop {
+    background-color: rgb(255 0 0 / 0);
+  }
+}
+
+/* dialog backdrop blue color*/
+.blueBackdrop::backdrop {
+  background-color: rgb(0 0 255 / 0);
+}
+
+.blueBackdrop[open]::backdrop {
+  background-color: rgb(0 0 255 / 0.75);
+}
+@starting-style {
+  .blueBackdrop[open]::backdrop {
+    background-color: rgb(0 0 255 / 0);
+  }
+}
