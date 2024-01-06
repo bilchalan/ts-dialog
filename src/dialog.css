@@ -1,51 +1,55 @@
-/* top */
-.slideFromTop {
-  transform: translateY(-100%);
+:root {
+  --distance: 500%;
+  --bg-Start-End-Color: rgb(0 0 0 / 0);
+  --animation-time: 0.7s;
 }
-.slideFromTop[open] {
-  transform: translateY(0);
+.animation-time3,
+.animation-time3::backdrop {
+  --animation-time: 0.3s;
+  transition: display 0.3s allow-discrete, overlay 0.3s allow-discrete,
+    background-color 0.3s;
 }
-@starting-style {
-  .slideFromTop[open] {
-    transform: translateY(-100%);
-  }
+.animation-time5,
+.animation-time5::backdrop {
+  --animation-time: 0.5s;
+  transition: display 0.5s allow-discrete, overlay 0.5s allow-discrete,
+    background-color 0.5s;
+}
+.animation-time7,
+.animation-time7::backdrop {
+  --animation-time: 0.7s;
+  transition: display 0.7s allow-discrete, overlay 0.7s allow-discrete,
+    background-color 0.7s;
+}
+.animation-time9,
+.animation-time9::backdrop {
+  --animation-time: 0.9s;
+  transition: display 0.9s allow-discrete, overlay 0.9s allow-discrete,
+    background-color 0.9s;
 }
 
-/* bottom */
-.slideFromBottom {
-  transform: translateY(100%);
+.slideFromTop {
+  --translate-from: translateY(calc(var(--distance) * -1));
 }
-.slideFromBottom[open] {
-  transform: translateY(0);
-}
-@starting-style {
-  .slideFromBottom[open] {
-    transform: translateY(100%);
-  }
-}
-/* left */
 .slideFromLeft {
-  transform: translateX(-500%);
+  --translate-from: translateX(calc(var(--distance) * -1));
 }
-.slideFromLeft[open] {
-  transform: translateX(0);
-}
-@starting-style {
-  .slideFromLeft[open] {
-    transform: translateX(-500%);
-  }
-}
-/* right */
 .slideFromRight {
-  transform: translateX(500%);
+  --translate-from: translateX(var(--distance));
 }
-.slideFromRight[open] {
-  opacity: 1;
+.slideFromBottom {
+  --translate-from: translateY(var(--distance));
+}
+/*dialog open css */
+.dOpen[open] {
   transform: translate(0);
 }
+.dOpen {
+  transform: var(--translate-from);
+}
 @starting-style {
-  .slideFromRight[open] {
-    transform: translateX(500%);
+  .dOpen[open] {
+    transform: var(--translate-from);
   }
 }
 /* zoom */
@@ -60,100 +64,100 @@
     transform: scale(0);
   }
 }
-
-/*-------------------similar condition for all------------------------*/
-/*trancition for all*/
-.allTransition {
-  transition:
-    all 0.3s ease-in-out,
-    overlay 0.3s ease-in-out allow-discrete,
-    display 0.3s ease-in-out allow-discrete;
-}
-/*opacity start style for all*/
-@starting-style {
-  .startOpacity[open] {
-    opacity: 0;
-  }
-}
-/*opacity at open style for all*/
-.openOpacity[open] {
+.dOpen[open] {
   opacity: 1;
 }
-/*opacity at end style for all*/
-.endOpacity {
+.dOpen {
   opacity: 0;
-}
-
-/*----------------------------------------------------------------------------------------------*/
-/* dialog backdrop*/
-.bkd::backdrop {
-  opacity: 0;
-  transition:
-    all 0.3s ease-out,
-    overlay 0.3s ease-out allow-discrete,
-    display 0.3s allow-discrete,
-    background-color 0.3s;
-}
-.bkd[open]::backdrop {
-  opacity: 0.75;
+  transition: opacity var(--animation-time) ease-out,
+    transform var(--animation-time) ease-out,
+    overlay var(--animation-time) ease-out allow-discrete,
+    display var(--animation-time) ease-out allow-discrete;
 }
 @starting-style {
-  .bkd[open]::backdrop {
+  .dOpen[open] {
     opacity: 0;
   }
 }
 
-/* dialog backdrop  black color*/
-.blackBackdrop::backdrop {
-  background-color: rgb(0 0 0 / 0);
-}
-
-.blackBackdrop[open]::backdrop {
-  background-color: rgb(0 0 0 / 0.75);
-}
-@starting-style {
-  .blackBackdrop[open]::backdrop {
-    background-color: rgb(0 0 0 / 0);
-  }
-}
-/* dialog backdrop white color*/
-.whiteBackdrop::backdrop {
-  background-color: rgb(255 255 255 / 0);
-}
-
-.whiteBackdrop[open]::backdrop {
-  background-color: rgb(255 255 255 / 0.75);
-}
-@starting-style {
-  .whiteBackdrop[open]::backdrop {
-    background-color: rgb(255 255 255 / 0);
-  }
-}
-
-/* dialog backdrop red color*/
-.redBackdrop::backdrop {
-  background-color: rgb(255 0 0 / 0);
+/* Transition the :backdrop when the dialog modal is promoted to the top layer */
+.bkd::backdrop {
+  background-color: var(--bg-Start-End-Color);
+  opacity: 0.65;
 }
 
 .redBackdrop[open]::backdrop {
-  background-color: rgb(255 0 0 / 0.75);
+  background-color: rgb(255 0 0 / 0.65);
 }
+.whiteBackdrop[open]::backdrop {
+  background-color: rgb(255 255 255 / 0.65);
+}
+.blueBackdrop[open]::backdrop {
+  background-color: rgb(0 0 255 / 0.65);
+}
+.blackBackdrop[open]::backdrop {
+  background-color: rgb(0 0 0 / 0.65);
+}
+.transparentBackdrop[open]::backdrop {
+  background-color: rgb(0 0 0 / 0);
+}
+
 @starting-style {
-  .redBackdrop[open]::backdrop {
-    background-color: rgb(255 0 0 / 0);
+  .bkd[open]::backdrop {
+    background-color: var(--bg-Start-End-Color);
   }
 }
 
-/* dialog backdrop blue color*/
-.blueBackdrop::backdrop {
-  background-color: rgb(0 0 255 / 0);
+/*====================================== for mozilla firefox =============================== */
+/* zoom in*/
+.zoomInOutMoz[open] {
+  animation: zoom-in var(--animation-time) ease-out;
+}
+@keyframes zoom-in {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+/* slide from top */
+.slideFromTopMoz[open] {
+  animation: fromTopIn var(--animation-time) ease-out;
+}
+@keyframes fromTopIn {
+  0% {
+    transform: translateY(calc(var(--distance) * -1));
+  }
 }
 
-.blueBackdrop[open]::backdrop {
-  background-color: rgb(0 0 255 / 0.75);
+/* slide from bottom */
+.slideFromBottomMoz[open] {
+  animation: fromBottomIn var(--animation-time) ease-out;
 }
-@starting-style {
-  .blueBackdrop[open]::backdrop {
-    background-color: rgb(0 0 255 / 0);
+@keyframes fromBottomIn {
+  0% {
+    transform: translateY(var(--distance));
+  }
+}
+
+/* slide from left */
+.slideFromLeftMoz[open] {
+  animation: fromLeftIn var(--animation-time) ease-out;
+}
+@keyframes fromLeftIn {
+  0% {
+    transform: translateX(calc(var(--distance) * -1));
+  }
+}
+
+/* slide from right */
+.slideFromRightMoz[open] {
+  animation: fromRightIn var(--animation-time) ease-out;
+}
+@keyframes fromRightIn {
+  0% {
+    transform: translateX(var(--distance));
   }
 }

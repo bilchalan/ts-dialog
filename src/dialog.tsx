@@ -4,13 +4,15 @@ import "./dialog.css";
 
 interface DialogProps extends DialogHTMLAttributes<HTMLDialogElement> {
   className?: string;
+  closeOnClickOutside?: boolean;
   animate?:
     | "slideFromTop"
     | "slideFromBottom"
     | "slideFromLeft"
     | "slideFromRight"
     | "zoomInOut";
-  backdropColor?: "black" | "white" | "red" | "blue";
+  animationTime?: 3 | 5 | 7 | 9;
+  backdropColor?: "black" | "white" | "red" | "blue" | "transparent";
   open?: boolean;
   onClose: () => void;
 }
@@ -18,21 +20,40 @@ interface DialogProps extends DialogHTMLAttributes<HTMLDialogElement> {
 export const Dialog: React.FC<DialogProps> = ({
   children,
   className,
+  closeOnClickOutside = true,
   animate,
+  animationTime,
   backdropColor,
   open,
   onClose,
   ...rest
 }) => {
+  //check firefox
+  let animateClass;
+  let backdropClass;
+  let animationTimeClass;
   /* animate class */
-  const animateClass = animate
-    ? `allTransition startOpacity openOpacity endOpacity ${animate}`
-    : "";
-  const backdropClass = backdropColor
-    ? `bkd ${backdropColor + "Backdrop"}`
-    : "";
-  /* all class with user defined */
-  const allClasses = `${animateClass} ${backdropClass} ${className || ""}`;
+  animateClass = animate ? `${animate}` : "";
+  /* animate time class */
+  animationTimeClass = animationTime ? `animation-time${animationTime}` : "";
+  /* backdrop color class */
+  backdropClass = backdropColor ? `bkd ${backdropColor + "Backdrop"}` : "";
+  function isFirefoxOrSafari() {
+    const userAgent = navigator.userAgent;
+    return (
+      /Firefox/i.test(userAgent) ||
+      /^((?!chrome|android).)*safari/i.test(userAgent)
+    );
+  }
+
+  if (isFirefoxOrSafari()) {
+    animateClass = animate ? `${animate}Moz` : "";
+    backdropClass = backdropColor ? `${backdropColor + "Backdrop"}` : "";
+  }
+
+  const allClasses = `dOpen ${animateClass} ${animationTimeClass} ${backdropClass} ${
+    className || ""
+  }`;
 
   const ref = useRef<HTMLDialogElement>(null);
 
@@ -62,14 +83,16 @@ export const Dialog: React.FC<DialogProps> = ({
       open
       ref={ref}
       onClick={(e) => {
-        const dialogDimensions = e.currentTarget.getBoundingClientRect();
-        if (
-          e.clientX < dialogDimensions.left ||
-          e.clientX > dialogDimensions.right ||
-          e.clientY < dialogDimensions.top ||
-          e.clientY > dialogDimensions.bottom
-        ) {
-          e.currentTarget.close();
+        if (closeOnClickOutside) {
+          const dialogDimensions = e.currentTarget.getBoundingClientRect();
+          if (
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom
+          ) {
+            e.currentTarget.close();
+          }
         }
       }}
       className={allClasses}

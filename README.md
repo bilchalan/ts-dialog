@@ -15,12 +15,14 @@ import { Dialog } from "ts-dialog";
 import { useState } from "react";
 
 const MyComponent: React.FC = () => {
-  const [openModal, setOpenModal] = useState < boolean > (false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
   return (
     <>
       <button onClick={() => setOpenModal(true)}>Open</button>
       <Dialog
         animate="zoomInOut"
+        animationTime={7}
+        closeOnClickOutside={false}
         backdropColor="black"
         className="p-16"
         style={{ padding: "4rem" }}
@@ -40,9 +42,11 @@ const MyComponent: React.FC = () => {
 
 ## Props
 
-- **animate** (optional): Specifies the dialog animation (e.g., 'slideFromTop', 'slideFromBottom', 'slideFromLeft','slideFromRight','zoomInOut'). Total 5 animation.
-- **backdropColor** (optional): Specifies the backdrop color (e.g., 'black', 'white', 'red', 'blue'). Total 4 color.
-- **open** (optional): Enables close and open the dialog.
+- **animate** (optional): Specifies the dialog animation (e.g., 'slideFromTop', 'slideFromBottom', 'slideFromLeft','slideFromRight' & 'zoomInOut'). Values are string.
+- **animationTime** (optional): Specifies animation time.(e.g.- 3, 5, 7 & 9). Values are number.
+- **backdropColor** (optional): Specifies the backdrop color (e.g., 'black', 'white', 'red', 'blue' & 'transparent'). Values are string. (Mozilla firefox & Safari do not support backdrop animations.)
+- **closeOnClickOutside** (optional): Enables whether dialog will close on click outside. Boolean value.
+- **open** (optional): Enables close and open the dialog. Boolean value.
 
 ## Author
 
